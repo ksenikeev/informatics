@@ -20,4 +20,11 @@ public class Student extends Person {
     public void setGroup(String group) {
         this.group = group;
     }
+
+    public String toString() {
+        String str = fio + ", " + birthDate + ", "
+                + gender + ", " + group;
+
+        return str;
+    }
 }

@@ -2,22 +2,17 @@ package ru.itis.lab12;
 
 public class Person {
 
-    private String lastName;
-    private String firstName;
-    private String middleName;
-    private String birthDate;
-    private String gender;
+    protected String fio;
+    protected String birthDate;
+    protected String gender;
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+
+    public String getFio() {
+        return new String(fio);
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setFio(String fio) {
+        this.fio = fio;
     }
 
     public void setBirthDate(String birthDate) {
@@ -28,18 +23,6 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
     public String getBirthDate() {
         return birthDate;
     }
@@ -47,4 +30,12 @@ public class Person {
     public String getGender() {
         return gender;
     }
+
+    public String toString() {
+        String str = fio + ", " + birthDate + ", "
+                + gender;
+
+        return str;
+    }
+
 }
