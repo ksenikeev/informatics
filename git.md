@@ -34,4 +34,18 @@ git add file
 
 либо в контекстном меню: git -> add
 
-4. 
+4. Фиксация состояния - COMMIT
+
+git commit -m "first commit"
+
+5. Подключение удаленного репозитория
+
+git remote add origin https://github.com/ksenikeev/informatics.git
+
+Git -> Manage remotes ...
+
+6. Отправка коммита на удаленный репозиторий (PUSH)
+
+git push -u origin main
+
+
