@@ -11,9 +11,8 @@ public class Main {
         student.setYear(2022);
         student.setGroup("11-200");
 
-        System.out.println(student.toString());
-
-        System.out.println(
-                "автобус".compareToIgnoreCase("автомобиль"));
+        HTMLPersonWriter writer
+                = new HTMLStudenWriter(student, "student.html");
+        writer.print();
     }
 }
