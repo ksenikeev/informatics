@@ -3,7 +3,7 @@ package ru.itis.lab12;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class HTMLPersonWriter {
+public abstract class HTMLPersonWriter {
 
     private Person person;
 
@@ -41,9 +41,7 @@ public class HTMLPersonWriter {
         writer.write("</body>\n");
     }
 
-    protected void printAddedInfo(FileWriter writer) throws IOException  {
-
-    }
+    protected abstract void printAddedInfo(FileWriter writer) throws IOException;
 
     private void printFoter(FileWriter writer) throws IOException {
         writer.write("</html>\n");

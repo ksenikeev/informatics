@@ -12,7 +12,20 @@ public class Main {
         student.setGroup("11-200");
 
         HTMLPersonWriter writer
-                = new HTMLStudenWriter(student, "student.html");
+                = new HTMLStudentWriter(student, "student.html");
         writer.print();
+
+        Teacher teacher = new Teacher();
+
+        teacher.setFio("Препод");
+        teacher.setBirthDate("2000-01-01");
+        teacher.setGender("М");
+
+        teacher.setPosition("Доцент");
+        teacher.setCources(new String[]{"Предмет 1", "Предмет 2", "Предмет 3"});
+
+        HTMLPersonWriter writer2
+                = new HTMLTeacherWriter(teacher, "teacher.html");
+        writer2.print();
     }
 }
