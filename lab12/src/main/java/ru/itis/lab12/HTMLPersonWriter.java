@@ -3,7 +3,7 @@ package ru.itis.lab12;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public abstract class HTMLPersonWriter {
+public abstract class HTMLPersonWriter implements HTMLWriter {
 
     private Person person;
 
@@ -47,6 +47,7 @@ public abstract class HTMLPersonWriter {
         writer.write("</html>\n");
     }
 
+    @Override
     public void print() {
         try (FileWriter writer = new FileWriter(fileName)) {
             printHeader(writer);
