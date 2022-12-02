@@ -2,36 +2,23 @@ package ru.itis.lab13;
 
 public class Main {
     public static void main(String[] args) {
-        IStack stack = new StackImplList();
+        IStack stack = new StackImpl();
 
-        Long l = System.nanoTime();
+        Long start = System.nanoTime();
 
+        for (int i = 0; i < 10000; ++i)
+            stack.push(1);
 
-        stack.push(1);
+        for (int i = 0; i < 10000; ++i)
+            stack.pop();
 
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
+        Long stop = System.nanoTime();
 
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
+        System.out.println("Время работы: " + (stop - start));
     }
+// 7445948 StackImplList
+// 2534548
+
+// 2074956
+
 }

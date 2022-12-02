@@ -27,7 +27,8 @@ public class StackImpl implements IStack {
     public void push(Object o) {
         // контролируем длину массива
         if (count + 1 > len ) {
-            Object[] tmp = new Object[len + (len / 2)];
+            len += (len / 2);
+            Object[] tmp = new Object[len];
             System.arraycopy(data, 0, tmp, 0, count);
             data = tmp;
         }
