@@ -18,10 +18,14 @@ public class StackImpl implements IStack {
     }
 
     public Object pop() {
-        Object tmp = data[count - 1];
-        data[count - 1] = null;
-        count--;
-       return tmp;
+        if (count > 0) {
+            Object tmp = data[count - 1];
+            data[count - 1] = null;
+            count--;
+            return tmp;
+        } else {
+            return null;
+        }
     }
 
     public void push(Object o) {

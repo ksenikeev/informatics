@@ -2,15 +2,33 @@ package ru.itis.lab13;
 
 public class Main {
     public static void main(String[] args) {
+
+
         IStack stack = new StackImpl();
 
         Long start = System.nanoTime();
 
-        for (int i = 0; i < 10000; ++i)
-            stack.push(1);
+        stack.push("1dasdfadfs");
+        stack.push("2dasdfadfs");
+        stack.push("3dasdfadfs");
+        stack.push("4dasdfadfs");
+        stack.push("5d5asdfadfs");
+        stack.push("6dasdfadfs");
+        stack.push("7dasdfadfs");
+        stack.push("8dasdfadfs");
+        stack.push("9dasdfadfs");
+        stack.push("10dasdfadfs");
+        stack.push("11dasdfadfs");
+        stack.push("12dasdfadfs");
 
-        for (int i = 0; i < 10000; ++i)
-            stack.pop();
+        stack.push(1);
+        stack.push(2);
+
+        System.out.println(stack.pop().getClass().getCanonicalName());
+        System.out.println(stack.pop().getClass().getCanonicalName());
+        System.out.println(stack.pop().getClass().getCanonicalName());
+        System.out.println(stack.pop().getClass().getCanonicalName());
+        System.out.println(stack.pop().getClass().getCanonicalName());
 
         Long stop = System.nanoTime();
 
