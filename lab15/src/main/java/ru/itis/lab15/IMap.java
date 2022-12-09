@@ -4,8 +4,8 @@ public interface IMap {
     /**
      * Значение ключа уникально, при попытке положить пару с
      * уже существующим ключем, меням значение value на новое
-     * @param key
-     * @param value
+     * @param key unique not null
+     * @param value not null
      */
     void put(String key, String value);
 
