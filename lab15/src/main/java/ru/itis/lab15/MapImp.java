@@ -15,12 +15,15 @@ public class MapImp implements IMap {
                     return;
                 }
             }
-            // есть ли место куда класть
-            if (countEntryes < entries.length) {
-
+            Entry entry = new Entry(key, value);
+            // если кончилось место куда класть
+            if (countEntryes >= entries.length) {
+                Entry[] temp = new Entry[countEntryes * 2];
+                System.arraycopy(entries,0, temp, 0, entries.length);
+                entries = temp;
             }
+            entries[countEntryes++] = entry;
         }
-        //countEntryes++;
     }
 
     public String getValueByKey(String key) {
@@ -53,9 +56,43 @@ public class MapImp implements IMap {
         return null;
     }
 
-    public void removeByKey(String key) {}
+    public void removeByKey(String key) {
+        int i = -1;
+        for(int n = 0; n < countEntryes; ++n) {
+            if (entries[n].key.equals(key)) {
+                i = n;
+                break;
+            }
+        }
 
-    public void removeByValue(String value) {}
+        if (i >= 0) {
+            if (i == countEntryes - 1) {
+                entries[i] = null;
+            } else {
+                entries[i] = entries[countEntryes - 1];
+            }
+            countEntryes--;
+        }
+    }
+
+    public void removeByValue(String value) {
+        int i = -1;
+        for(int n = 0; n < countEntryes; ) {
+            if (entries[n].value.equals(value)) {
+                i = n;
+                if (i == countEntryes - 1) {
+                    entries[i] = null;
+                } else {
+                    entries[i] = entries[countEntryes - 1];
+                }
+                countEntryes--;
+            } else {
+                ++n;
+            }
+        }
+
+
+    }
 
     public String[] getAllKeys() {
         String[] result = new String[countEntryes];
@@ -70,5 +107,10 @@ public class MapImp implements IMap {
     private class Entry {
         String key;
         String value;
+
+        Entry(String a1, String a2) {
+            key = a1;
+            value = a2;
+        }
     }
 }
