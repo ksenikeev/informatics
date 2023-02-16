@@ -19,6 +19,11 @@
         <module>lab13</module>
         <module>lab14</module>
         <module>lab15</module>
+        <module>lab16</module>
+        <module>cons</module>
+        <module>lab2__prequel</module>
+        <module>ulab2_1</module>
+        <module>lab2_2</module>
     </modules>
 
     <properties>

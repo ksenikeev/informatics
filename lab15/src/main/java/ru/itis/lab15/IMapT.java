@@ -1,33 +1,33 @@
 package ru.itis.lab15;
 
-public interface IMap {
+public interface IMapT<K, V> {
     /**
      * Значение ключа уникально, при попытке положить пару с
      * уже существующим ключем, меням значение value на новое
      * @param key unique not null
      * @param value not null
      */
-    void put(String key, Integer value);
+    void put(K key, V value);
 
     /**
      * @param key
      * @return null или найденное значение
      */
-    Integer getValueByKey(String key);
+    V getValueByKey(K key);
 
     /**
      * @param value
      * @return null или массив ключей, соответствующих значению
      */
-    String[] getKeysByValue(Integer value);
+    <K> K[] getKeysByValue(V value);
 
-    void removeByKey(String key);
+    void removeByKey(K key);
 
     /**
      * удалить все пары, соответствующие значению
      * @param value
      */
-    void removeByValue(Integer value);
+    void removeByValue(V value);
 
-    String[] getAllKeys();
+    <K> K[] getAllKeys();
 }

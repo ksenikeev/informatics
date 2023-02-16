@@ -1,4 +1,4 @@
-package ru.itis.lab15;
+package ru.itis.textanalysis.map;
 
 public class MapImp implements IMap {
 
@@ -27,9 +27,9 @@ public class MapImp implements IMap {
     }
 
     public Integer getValueByKey(String key) {
-        for (Entry entry : entries) {
-            if (entry.key.equals(key)) {
-                return entry.value;
+        for (int i = 0; i < countEntryes; ++i) {
+            if (entries[i].key.equals(key)) {
+                return entries[i].value;
             }
         }
         return null;
@@ -110,13 +110,43 @@ public class MapImp implements IMap {
         System.out.println();
     }
 
-    private class Entry {
-        String key;
-        Integer value;
+    void sortDesk() {
+        for(int i = 0; i < countEntryes - 1; ++i) {
+            for (int j = 0; j < countEntryes - i - 1; ++j) {
+                if (entries[j].compare(entries[j+1]) < 0) {
+                    Entry tmp = entries[j];
+                    entries[j] = entries[j+1];
+                    entries[j+1] = tmp;
+                }
+            }
+        }
+    }
+
+    public Entry[] get100max() {
+        sortDesk();
+
+        Entry[] tmp = new Entry[100];
+        System.arraycopy(entries,0, tmp, 0, 100);
+        return tmp;
+    }
+
+    public class Entry {
+        public String key;
+        public Integer value;
 
         Entry(String a1, Integer a2) {
             key = a1;
             value = a2;
+        }
+
+        int compare(Entry p) {
+            if (this.value == p.value) {
+                return 0;
+            } else if (this.value > p.value) {
+                return 1;
+            } else {
+                return -1;
+            }
         }
     }
 }

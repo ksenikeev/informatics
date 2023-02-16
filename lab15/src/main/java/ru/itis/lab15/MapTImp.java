@@ -1,11 +1,14 @@
 package ru.itis.lab15;
 
-public class MapImp implements IMap {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class MapTImp<K, V> implements IMapT<K, V> {
 
     int countEntryes = 0;
-    private Entry[] entries = new Entry[10];
+    private Entry<K,V>[] entries = new Entry[10];
 
-    public void put(String key, Integer value) {
+    public void put(K key, V value) {
 
         if (key != null && value != null) {
             // Проверяем уникальность key
@@ -26,8 +29,8 @@ public class MapImp implements IMap {
         }
     }
 
-    public Integer getValueByKey(String key) {
-        for (Entry entry : entries) {
+    public V getValueByKey(K key) {
+        for (Entry<K,V> entry : entries) {
             if (entry.key.equals(key)) {
                 return entry.value;
             }
@@ -35,7 +38,7 @@ public class MapImp implements IMap {
         return null;
     }
 
-    public String[] getKeysByValue(Integer value) {
+    public<K>  K[] getKeysByValue(V value) {
         int count = 0;
         for (int i = 0; i < countEntryes; ++i) {
             if (entries[i].value.equals(value)) {
@@ -44,19 +47,19 @@ public class MapImp implements IMap {
         }
 
         if (count > 0) {
-            String[] result = new String[count];
+            Object[] result = new Object[count];
             int k = 0;
             for (int i = 0; i < countEntryes; ++i) {
                 if (entries[i].value.equals(value)) {
-                    result[k++] = entries[i].key;
+                    result[k++] = (K)entries[i].key;
                 }
             }
-            return result;
+            return (K[]) result;
         }
         return null;
     }
 
-    public void removeByKey(String key) {
+    public void removeByKey(K key) {
         int i = -1;
         for(int n = 0; n < countEntryes; ++n) {
             if (entries[n].key.equals(key)) {
@@ -75,7 +78,7 @@ public class MapImp implements IMap {
         }
     }
 
-    public void removeByValue(Integer value) {
+    public void removeByValue(V value) {
         int i = -1;
         for(int n = 0; n < countEntryes; ) {
             if (entries[n].value.equals(value)) {
@@ -93,16 +96,17 @@ public class MapImp implements IMap {
         }
     }
 
-    public String[] getAllKeys() {
-        String[] result = new String[countEntryes];
+    public<K>  K[] getAllKeys() {
+
+        Object[] result = new Object[countEntryes];
         for (int i = 0; i < countEntryes; ++i) {
-            result[i] = entries[i].key;
+            result[i] = (K)entries[i].key;
         }
-        return result;
+        return (K[]) result;
     }
 
     public void print() {
-        for(Entry entry : entries) {
+        for(Entry<K,V> entry : entries) {
             if (entry == null) System.out.print("{null}, ");
             else
                 System.out.printf("{%s : %s},", entry.key, entry.value);
@@ -110,11 +114,11 @@ public class MapImp implements IMap {
         System.out.println();
     }
 
-    private class Entry {
-        String key;
-        Integer value;
+    private class Entry<K,V> {
+        K key;
+        V value;
 
-        Entry(String a1, Integer a2) {
+        Entry(K a1, V a2) {
             key = a1;
             value = a2;
         }

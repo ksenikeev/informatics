@@ -1,4 +1,4 @@
-package ru.itis.lab15;
+package ru.itis.textanalysis.map;
 
 public interface IMap {
     /**
@@ -30,4 +30,6 @@ public interface IMap {
     void removeByValue(Integer value);
 
     String[] getAllKeys();
+
+
 }
