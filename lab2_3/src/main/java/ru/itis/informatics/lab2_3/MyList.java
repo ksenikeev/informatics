@@ -132,6 +132,10 @@ public class MyList<E> implements List<E> {
     //TODO
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+        MyList<E> tmp = new MyList<>();
+        for(int i = fromIndex; i < toIndex; i++){
+            tmp.add(this.get(i));
+        }
+        return tmp;
     }
 }

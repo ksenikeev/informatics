@@ -25,6 +25,8 @@
         <module>ulab2_1</module>
         <module>lab2_2</module>
         <module>lab2_3</module>
+        <module>lab2_4</module>
+        <module>lab2_5</module>
     </modules>
 
     <properties>

@@ -1,23 +1,23 @@
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
 public class TestCollection<T> implements Collection<T> {
 
+    private Object[] data = new Object[100];
 
-    public static void main(String[] args) {
-
-    }
+    private int countData = 0;
 
     //TODO
     @Override
     public int size() {
-        return 0;
+        return countData;
     }
 
     //TODO
     @Override
     public boolean isEmpty() {
-        return false;
+        return (countData == 0);
     }
 
     @Override
@@ -25,15 +25,43 @@ public class TestCollection<T> implements Collection<T> {
         return false;
     }
 
+    private class TestIterator<T> implements Iterator<T> {
+
+        int cursor = -1;
+
+        @Override
+        public boolean hasNext() {
+            return cursor + 1 < countData;
+        }
+
+        @Override
+        public T next() {
+            return (T)data[++cursor];
+        }
+    }
+
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<>() {
+            int cursor = -1;
+
+            @Override
+            public boolean hasNext() {
+                return cursor + 1 < countData;
+            }
+
+            @Override
+            public T next() {
+                return (T)data[++cursor];
+            }
+
+        };
     }
 
     //TODO
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(data, countData);
     }
 
     @Override
@@ -44,6 +72,11 @@ public class TestCollection<T> implements Collection<T> {
     //TODO
     @Override
     public boolean add(T t) {
+        if (countData < 100) {
+            data[countData++] = t;
+            return true;
+        }
+
         return false;
     }
 
@@ -75,6 +108,6 @@ public class TestCollection<T> implements Collection<T> {
     //TODO
     @Override
     public void clear() {
-
+        countData = 0;
     }
 }
