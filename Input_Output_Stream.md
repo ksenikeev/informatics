@@ -55,3 +55,49 @@ public abstract class OutputStream implements Closeable, Flushable {
 - `BufferedOutputStream`
 
 https://shelly.kpfu.ru/e-ksu/docs/F1980796675/EZ4B8235___kopiya.JPG?rnd=6119
+
+# Потоки `Writer` и `Reader`
+
+Потоки `Writer` и `Reader` функционально схожи с потоками `InputStream` и `OutputStream`,
+но в отличие от них работают с символами (`char`).
+
+### Основные методы `Writer`: 
+- `append(char c)`
+- `close()`
+- `write(int char)`
+- `write(char[] buf, int offset, int count)`
+- `write(String string, int offset, int count)`
+
+### Наследники класса `Writer`:
+
+- BufferedWriter - буферизированный выходной символьный поток; позволяет повысить производительность за счёт снижения количества операций физической записи в выходное устройство;
+- CharArrayWriter - выходной поток, который пишет в символьный массив;
+- FileWriter - выходной поток, пишущий в файл; в конструкторе можно определить вывод в конец файла. Создание объекта не зависит от наличия файла, он будет создан в случае необходимости. Если файл существует и он доступен только для чтения, то передаётся исключение IOException
+- FilterWriter - фильтрующий писатель
+- OutputStreamWriter -выходной поток, транслирующий байты в символы
+- PrintWriter - выходной поток, включающий методы print() и println()
+- StringWriter - выходной поток, пишущий в строку
+
+### Основные методы `Reader`
+- `int read()`
+- `close()`
+- `boolean ready()`
+- `int read(char[] buf, int offset, int count)`
+
+### Наследники класса `Reader`:
+
+- BufferedReader - буферизированный входной символьный поток; увеличивает производительность за счёт буферизации ввода;
+- CharArrayReader - входной поток чтения символьного массива;
+- FileReader - входной поток чтения содержимого файла; в конструкторе класса нужно указать либо путь к файлу, либо объект типа File;
+- FilterReader - фильтрующий читатель;
+- InputStreamReader - входной поток, транслирующий байты в символы;
+- StringReader - входной поток, читающий из строки.
+
+# Использование потоков в блоке `try`
+
+Автоматическое закрытие
+```
+try (InputStream is = new FileInputStream(in)) {
+    //....
+}
+```
