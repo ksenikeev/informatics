@@ -5,9 +5,9 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         try {
-            encode("Input_Output_Stream.md",
-                    "Input_Output_Stream_cp1251.md",
-                    "UTF8", "cp1251");
+            encode("Input_Output_Stream_cp1251.md",
+                    "Input_Output_Stream_UTF8.md",
+                     "cp1251", "UTF8");
         } catch (IOException e) {
             e.printStackTrace();
         }

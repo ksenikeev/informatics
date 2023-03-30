@@ -16,7 +16,10 @@ public class Row {
     private byte russian;
     private byte chili;
     private PizzaSize size;
-
+    private byte closed;
+    private byte chicken;
+    private byte sausage;
+    private byte pineapple;
     public String getName() {
         return name;
     }
@@ -73,6 +76,22 @@ public class Row {
         return size;
     }
 
+    public byte getClosed() {
+        return closed;
+    }
+
+    public byte getChicken() {
+        return chicken;
+    }
+
+    public byte getSausage() {
+        return sausage;
+    }
+
+    public byte getPineapple() {
+        return pineapple;
+    }
+
     public static PizzaBuilder builder() {
         return new PizzaBuilder();
     }
@@ -92,7 +111,11 @@ public class Row {
         russian = builder.russian;
         parmesan = builder.parmesan;
         chili = builder.chili;
-
+        size = builder.size;
+        closed = builder.closed;
+        chicken = builder.chicken;
+        sausage = builder.sausage;
+        pineapple = builder.pineapple;
     }
 
     public static class PizzaBuilder {
@@ -110,6 +133,10 @@ public class Row {
         private byte russian;
         private byte chili;
         private PizzaSize size;
+        private byte closed;
+        private byte chicken;
+        private byte sausage;
+        private byte pineapple;
 
         public PizzaBuilder name(String name) {
             this.name = name;
@@ -181,6 +208,25 @@ public class Row {
             return this;
         }
 
+        public PizzaBuilder closed(byte closed) {
+            this.closed = closed;
+            return this;
+        }
+
+        public PizzaBuilder chicken(byte chicken) {
+            this.chicken = chicken;
+            return this;
+        }
+
+        public PizzaBuilder sausage(byte sausage) {
+            this.sausage = sausage;
+            return this;
+        }
+
+        public PizzaBuilder pineapple(byte pineapple) {
+            this.pineapple = pineapple;
+            return this;
+        }
 
         public Row build() {
             return new Row(this);
