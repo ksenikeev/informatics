@@ -33,6 +33,7 @@
         <module>lab2_9</module>
         <module>lab2_10</module>
         <module>lab2_11</module>
+        <module>lab2_12DB</module>
     </modules>
 
     <properties>
