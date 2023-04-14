@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,10 +50,48 @@ public class SpendingService {
         List<Spending> list = readSpending();
         list.add(spending);
         saveSpending(list);
+    }
 
+    public void getAllSpendingToDay() {
+        List<Spending> result;
+        LocalDate localDate = LocalDate.now();
 
+        readSpending().stream().filter(spending -> {
+            LocalDate spendingDate =
+            LocalDate.ofInstant(spending.getDate().toInstant(), ZoneId.systemDefault());
+            return spendingDate.equals(localDate);
+        } ).forEach(System.out::println);
+    }
+    public void getAllSpendingsByCategory(int category){
+        MerchNameService service = new MerchNameService();
+        readSpending().stream().filter(s->{
+            return service.getCategoryByMerch(s.getMerchName()) == category;
+        }).forEach(System.out::println);
+    }
+    public void getSumSpendingsByCategory(int category){
+        MerchNameService service = new MerchNameService();
+        System.out.println(
+                readSpending()
+                .stream()
+                        .filter(s -> {
+            return service.getCategoryByMerch(s.getMerchName()) == category;
+        })
+                        .mapToDouble(s -> s.getSumm())
+                        .sum()
+        );
+    }
 
+    public void getSumSpendingsByMerch(int merch){
 
+        System.out.println(
+                readSpending()
+                        .stream()
+                        .filter(s -> {
+                            return merch == s.getMerchName();
+                        })
+                        .mapToDouble(s -> s.getSumm())
+                        .sum()
+        );
     }
 
 }

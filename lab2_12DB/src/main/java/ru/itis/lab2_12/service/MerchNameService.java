@@ -15,7 +15,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MerchNameService {
-    public static void saveMerchName(List<MerchName> merches) {
+    private List<MerchName> merches;
+
+    public MerchNameService() {
+        merches=readMerchName();
+    }
+
+    public void saveMerchName(List<MerchName> merches) {
         Gson gson = new Gson();
         String json = gson.toJson(merches);
         System.out.println(json);
@@ -24,9 +30,10 @@ public class MerchNameService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        this.merches = merches;
     }
 
-    public static List<MerchName> readMerchName() {
+    public List<MerchName> readMerchName() {
         List<MerchName> result = null;
         Gson gson = new Gson();
         try(Reader reader = new FileReader("merches.json")) {
@@ -49,6 +56,13 @@ public class MerchNameService {
         list.add(merchName);
         saveMerchName(list);
 
+    }
+    public int getCategoryByMerch(int merchID){
+        return this.merches
+                .stream()
+                .filter(x->x.getId()==merchID)
+                .findFirst()
+                .get().getCategory();
     }
 
 }

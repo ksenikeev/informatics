@@ -11,6 +11,8 @@ import ru.itis.lab2_12.service.SpendingService;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,7 @@ public class Main {
     public static void main(String[] args) {
 
         Main main = new Main();
+        main.initialize();
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -50,12 +53,17 @@ public class Main {
                     break;
                 case 4:
                     // Показать все покупки за сегодня
+                    main.spendingService.getAllSpendingToDay();
                     break;
                 case 5:
                     // Показать сумму покупок в конкретой категории
+                    System.out.print("Введите категорию:");
+                    main.spendingService.getSumSpendingsByCategory(scanner.nextInt());
                     break;
                 case 6:
                     // Показать сумму покупок выбранного товара
+                    System.out.print("Введите товар");
+                    main.spendingService.getSumSpendingsByMerch(scanner.nextInt());
                     break;
                 case 7:
                     // Показать средние ежедневные траты (сколько в день в среднем тратится)

@@ -39,4 +39,14 @@ public class Spending {
         this.summ = summ;
         this.merchName = merchName;
     }
+
+    @Override
+    public String toString() {
+        return "Spending{" +
+                "date=" + date +
+                ", summ=" + summ +
+                ", merchName=" + merchName +
+                '}';
+    }
+
 }
