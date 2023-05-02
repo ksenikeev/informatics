@@ -1,6 +1,6 @@
 package ru.itis;
 
-public class MainThreadsSinc {
+public class MainThreadsSinc2 {
 
     private static final int SIZE = 400000000;
 
@@ -15,23 +15,10 @@ public class MainThreadsSinc {
 
     public static void main(String[] args) throws InterruptedException {
 
-        MainThreadsSinc mainThreads = new MainThreadsSinc();
+        MainThreadsSinc2 mainThreads = new MainThreadsSinc2();
         mainThreads.initialize();
 
-/*
-        long time1 = System.nanoTime();
-        double s1 = mainThreads.calculateSum();
-        long time1_1 = System.nanoTime() - time1;
-        System.out.println(s1 + ": " + time1_1);
-*/
-
-        long time2 = System.nanoTime();
-        double s2 = mainThreads.calculateSumThread();
-        long time2_1 = System.nanoTime() - time2;
-        System.out.println(s2 + ": " + time2_1);
-
-        //System.out.println(((double) time1_1) / time2_1);
-
+        mainThreads.calculateSumThread();
     }
 
     private void initialize() {
@@ -40,18 +27,12 @@ public class MainThreadsSinc {
         }
     }
 
-    // Линейный порядок вычисления модуля вектора
-    private double calculateSum() {
-        long s = 0;
-        for (int i = 0; i < SIZE; ++i) {
-            s += (array[i] * array[i]);
-        }
-        return Math.sqrt(s);
-    }
+    private void calculateSumThread() {
 
-    private double calculateSumThread() {
 
         tCount = Runtime.getRuntime().availableProcessors();
+
+        Summator summator = new SummatorImpl(tCount);
 
         partSize = SIZE/tCount;
 
@@ -60,32 +41,25 @@ public class MainThreadsSinc {
 
         for(int k = 0; k < tCount; ++k) {
             threads[k] = new Thread(
-                    new PartSumm(array, k)
+                    new PartSumm(array, k, summator)
             );
             threads[k].start();
         }
-
-
-
-        for(int k = 0; k < tCount; ++k) {
-            try {
-                System.out.println("join " + k);
-                threads[k].join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        return Math.sqrt(summ);
     }
 
+    /**
+     * Класс решает задачу нахождения части суммы квадратов
+     */
     private class PartSumm implements Runnable {
+
+        Summator summator;
 
         long[] array;
         int k;
-        public PartSumm(long[] array, int k) {
+        public PartSumm(long[] array, int k, Summator summator) {
             this.array = array;
             this.k = k;
+            this.summator = summator;
         }
 
         @Override
@@ -99,14 +73,35 @@ public class MainThreadsSinc {
                 s += (array[i] * array[i]);
             }
 
-            addSumm(s);
+            summator.setSum(s);
 
             long te = System.nanoTime();
             System.out.println("end " + k + " " + te + ", time " + (te-ts));
         }
 
-        public synchronized void addSumm(long s) {
-            summ += s;
+    }
+
+    class SummatorImpl implements Summator {
+
+        int countThreads;
+
+        Long summ = 0L;
+
+        int counter = 0;
+
+        public SummatorImpl(int countThreads) {
+            this.countThreads = countThreads;
+        }
+
+        @Override
+        public synchronized void setSum(long sum) {
+            summ += sum;
+            counter++;
+            System.out.println(counter + " " + summ);
+            if (counter == countThreads) {
+                System.out.println(Math.sqrt(summ));
+            }
+
         }
     }
 }

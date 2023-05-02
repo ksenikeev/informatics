@@ -35,6 +35,8 @@
         <module>lab2_11</module>
         <module>lab2_12DB</module>
         <module>lab2_13</module>
+        <module>lab2_14</module>
+        <module>lab2_15</module>
     </modules>
 
     <properties>

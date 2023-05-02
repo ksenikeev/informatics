@@ -18,17 +18,19 @@ public class MainThreads {
         MainThreads mainThreads = new MainThreads();
         mainThreads.initialize();
 
+/*
         long time1 = System.nanoTime();
         double s1 = mainThreads.calculateSum();
         long time1_1 = System.nanoTime() - time1;
         System.out.println(s1 + ": " + time1_1);
+*/
 
         long time2 = System.nanoTime();
         double s2 = mainThreads.calculateSumThread();
         long time2_1 = System.nanoTime() - time2;
         System.out.println(s2 + ": " + time2_1);
 
-        System.out.println(((double) time1_1) / time2_1);
+        //System.out.println(((double) time1_1) / time2_1);
 
     }
 
