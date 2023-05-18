@@ -10,7 +10,6 @@ public class WindowsJob implements Runnable {
 
     @Override
     public void run() {
-
         try {
             proectThread.join();
         } catch (InterruptedException e) {
